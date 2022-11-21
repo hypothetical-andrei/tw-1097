@@ -1,0 +1,35 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    font-family: sans-serif;
+    padding: 32px;
+    color: white;
+    background-color: orange;
+}
+
+.container {
+    background-color: #c21322;
+    display: flex;
+    height: 700px;
+    justify-content: center;
+    align-items: center;
+}
+
+.column-item {
+    width: 30vw;
+    height: 200px;
+    background-color: lightblue;
+    font-size: 3em;
+    display: flex;
+    align-items: center;
+    justify-content: center;   
+}
+
+.column-item:hover {
+    background-color: lightgreen;
+}
