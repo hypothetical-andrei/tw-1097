@@ -35,6 +35,12 @@ app.post('/books', (req, res) => {
 		if (typeof req.body.title !== 'string' || req.body.title.length < 3) {
 			throw new Error('title is invalid')
 		}
+		if (typeof req.body.author !== 'string' || req.body.author.length < 3) {
+			throw new Error('author is invalid')
+		}
+		if (typeof req.body.genre !== 'string' || req.body.genre.length < 1) {
+			throw new Error('genre is invalid')
+		}
 		app.locals.books.push(req.body)
 		res.status(201).json({ message: 'created' })
 	} catch (err) {
