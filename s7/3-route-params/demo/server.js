@@ -50,7 +50,7 @@ app.put('/books/:bid', (req, res) => {
 		app.locals.books[bookIndex].title = req.body.title
 		app.locals.books[bookIndex].author = req.body.author
 		app.locals.books[bookIndex].genre = req.body.genre
-		res.status(200).json({ message: 'accepted' })
+		res.status(202).json({ message: 'accepted' })
 	} else {
 		res.status(404).json({ message: 'not found' })
 	}
