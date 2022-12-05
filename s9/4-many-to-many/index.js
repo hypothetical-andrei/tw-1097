@@ -109,7 +109,11 @@ application.use(express.json())
   try {
     const university = await University.findByPk(request.params.universityId)
     if (university) {
-      const students = await university.getStudents({id: request.params.studentId})
+      const students = await university.getStudents({
+        where: {
+          id: request.params.studentId 
+        }
+      })
       const student = students.shift()
       if (student) {
         request.json(student)
@@ -131,7 +135,11 @@ application.put('/universities/:universityId/students/:studentId', async (reques
   try {
     const university = await University.findByPk(request.params.universityId)
     if (university) {
-      const students = await university.getStudents({id: request.params.studentId})
+      const students = await university.getStudents({
+        where: {
+          id: request.params.studentId 
+        }
+      })      
       const student = students.shift()
       if (student) {
         await student.update(request.body)
@@ -154,7 +162,11 @@ application.delete('/universities/:universityId/students/:studentId', async (req
   try {
     const university = await University.findByPk(request.params.universityId)
     if (university) {
-      const students = await university.getStudents({id: request.params.studentId})
+      const students = await university.getStudents({
+        where: {
+          id: request.params.studentId 
+        }
+      })
       const student = students.shift()
       if (student) {
         await student.destroy()
@@ -198,7 +210,11 @@ application.get('/university/:universityId/courses/:courseId', async (request, r
   try {
     const university = await University.findByPk(request.params.universityId)
     if (university) {
-      const courses = await university.getCourses({id: request.params.courseId})
+      const courses = await university.getCourses({
+        where: {
+          id: request.params.courseId 
+        }
+      })
       const course = courses.shift()
       if (course) {
         response.json(course)
@@ -239,7 +255,11 @@ application.put('/universities/:universityId/courses/:courseId', async (request,
   try {
     const university = await University.findByPk(request.params.universityId)
     if (university) {
-      const courses = await university.getCourses({id: request.params.courseId})
+      const courses = await university.getCourses({
+        where: {
+          id: request.params.courseId 
+        }
+      })
       const course = courses.shift()
       if (course) {
         await course.update(request.body)
@@ -262,7 +282,11 @@ application.delete('/universities/:universityId/courses/:courseId', async (reque
   try {
     const university = await University.findByPk(request.params.universityId)
     if (university) {
-      const courses = await university.getCourses({id: request.params.courseId})
+      const courses = await university.getCourses({
+        where: {
+          id: request.params.courseId 
+        }
+      })      
       const course = courses.shift()
       if (course) {
         await course.destroy()
@@ -285,7 +309,11 @@ application.get('/universities/:universityId/students/:studentId/enrollements', 
   try {
     const university = await University.findByPk(request.params.universityId)
     if (university) {
-      const students = await university.getStudents({id: request.params.studentId})
+      const students = await university.getStudents({
+        where: {
+          id: request.params.studentId 
+        }
+      })
       const student = students.shift()
       if (student) {
         const courses = await student.getCourses({attributes: ['id']})
@@ -312,9 +340,17 @@ application.post('/universities/:universityId/students/:studentId/enrollements/:
   try {
     const university = await University.findByPk(request.params.universityId)
     if (university) {
-      const students = await university.getStudents({id: request.params.studentId})
+      const students = await university.getStudents({
+        where: {
+          id: request.params.studentId 
+        }
+      })
       const student = students.shift()
-      const courses = await university.getCourses({id: request.params.courseId})
+      const courses = await university.getCourses({
+        where: {
+          id: request.params.courseId
+        }
+      })
       const course = courses.shift()
       if (student && course) {
         student.addCourse(course)
@@ -338,9 +374,17 @@ application.post('/universities/:universityId/students/:studentId/enrollements/:
   try {
     const university = await University.findByPk(request.params.universityId)
     if (university) {
-      const students = await university.getStudents({id: request.params.studentId})
+      const students = await university.getStudents({
+        where: {
+          id: request.params.studentId
+        }
+      })
       const student = students.shift()
-      const courses = await university.getCourses({id: request.params.courseId})
+      const courses = await university.getCourses({
+        where: {
+          id: request.params.courseId
+        }
+      })
       const course = courses.shift()
       if (student && course) {
         student.removeFromCourse(course)
@@ -364,7 +408,11 @@ application.get('/universities/:universityId/courses/:courseId/enrollements', as
   try {
     const university = await University.findByPk(request.params.universityId)
     if (university) {
-      const courses = await university.getCourses({id: request.params.courseId})
+      const courses = await university.getCourses({
+        where: {
+          id: request.params.courseId
+        }
+      })
       const course = courses.shift()
       if (course) {
         const students = await course.getStudents({attributes: ['id']})
@@ -391,9 +439,17 @@ application.post('/universities/:universityId/courses/:courseId/enrollements/:st
   try {
     const university = await University.findByPk(request.params.universityId)
     if (university) {
-      const courses = await university.getCourses({id: request.params.courseId})
+      const courses = await university.getCourses({
+        where: {
+          id: request.params.courseId
+        }
+      })
       const course = courses.shift()
-      const students = await university.getStudents({id: request.params.studentId})
+      const students = await university.getStudents({
+        where:{
+          id: request.params.studentId
+        }
+      })
       const student = students.shift()
       if (course && student) {
         course.addStudent(student)
@@ -417,9 +473,17 @@ application.post('/universities/:universityId/courses/:courseId/enrollements/:st
   try {
     const university = await University.findByPk(request.params.universityId)
     if (university) {
-      const courses = await university.getCourses({id: request.params.courseId})
+      const courses = await university.getCourses({
+        where: {
+          id: request.params.courseId
+        }
+      })
       const course = courses.shift()
-      const students = await university.getStudents({id: request.params.studentId})
+      const students = await university.getStudents({
+        where: {
+          id: request.params.studentId
+        }
+      })
       const student = students.shift()
       if (student && course) {
         course.removeStudent(student)

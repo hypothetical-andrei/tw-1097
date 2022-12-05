@@ -130,7 +130,11 @@ app.put('/universities/:universityId/students/:studentId', async (req, res, next
   try {
     const university = await University.findByPk(req.params.universityId)
     if (university) {
-      const students = await university.getStudents({ id: req.params.studentId })
+      const students = await university.getStudents({ 
+        where: {
+          id: req.params.studentId 
+        }
+      })
       const student = students.shift()
       if (student) {
         student.studentFullName = req.body.fullName

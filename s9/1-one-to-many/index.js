@@ -43,7 +43,7 @@ app.get('/universities', async (req, res, next) => {
 /**
  * POST a new university to the database.
  */
-app.post('/university', async (req, res, next) => {
+app.post('/universities', async (req, res, next) => {
   try {
     await University.create(req.body)
     res.status(201).json({ message: 'University Created!' })
