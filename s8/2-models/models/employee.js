@@ -1,7 +1,13 @@
 const { Sequelize, sequelize } = require('../db')
 
 const Employee = sequelize.define('employee', {
-  firstName: Sequelize.STRING,
+  firstName: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      len: [3, 10]
+    }
+  },
   lastName: {
     type: Sequelize.STRING,
     allowNull: false
@@ -29,6 +35,4 @@ const Employee = sequelize.define('employee', {
   }
 })
 
-module.exports = {
-  Employee
-}
+module.exports = Employee
